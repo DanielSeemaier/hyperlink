@@ -62,7 +62,9 @@ int main(const int argc, const char *argv[]) {
             ++self_loops_removed;
         }
 
-        if (edges.size() % 100'000'000 == 0) {
+        if (sizeof(std::pair<NodeID, NodeID>) * edges.size() %
+                (1024 * 1024 * 1024) ==
+            0) {
             std::cout << "\t" << toker.position() / 1024 / 1024 / 1024
                       << " GB, removed " << self_loops_removed
                       << " self-loops (= "
