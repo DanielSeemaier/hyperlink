@@ -166,7 +166,7 @@ int main(const int argc, const char *argv[]) {
 
     const ParhipID n = xadj.size();
     xadj.push_back(0);
-    std::exclusive_scan(xadj.begin(), xadj.end(), xadj.begin(), 0);
+    std::exclusive_scan(xadj.begin(), xadj.end(), xadj.begin(), static_cast<ParhipID>(0));
     const ParhipID m = xadj.back();
 
     std::cout << "There are " << n << " nodes and " << m << " edges"
