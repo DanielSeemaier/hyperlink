@@ -13,4 +13,5 @@ target_link_libraries(revsbin PUBLIC ips4o)
 
 add_executable(edges2parhip edges2parhip.cc)
 
+add_executable(edges2parhip64 edges2parhip64.cc)
 
