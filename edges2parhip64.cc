@@ -67,7 +67,7 @@ class Merger {
         for (std::size_t b = 0; b < _B; ++b) {
             tree[_B + b] = {get(b).first, b};
         }
-        for (std::size_t i = _B - 1; i > 0; ++i) {
+        for (std::size_t i = _B - 1; i > 0; --i) {
             tree[i] = std::min(tree[i * 2], tree[i * 2 + 1]);
         }
 
@@ -77,7 +77,7 @@ class Merger {
             l(get(b));
             advance(b);
 
-            tree[_B + b] = {get(b).first, b};
+            auto winner = tree[_B + b] = {get(b).first, b};
             for (std::size_t i = (_B + b) >> 1; i > 0; i >>= 1) {
                 tree[i] = std::min(tree[i * 2], tree[i * 2 + 1]);
             }

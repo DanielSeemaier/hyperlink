@@ -135,10 +135,10 @@ int main(const int argc, const char *argv[]) {
         std::exit(1);
     }
 
-    if (file_size(in_a) != file_size(in_b)) {
-        std::cerr << "error: input files have different sizes\n";
-        std::exit(1);
-    }
+    //if (file_size(in_a) != file_size(in_b)) {
+        //std::cerr << "error: input files have different sizes\n";
+        //std::exit(1);
+    //}
 
     std::ofstream out(output_filename, std::ios::binary | std::ios_base::trunc);
 
