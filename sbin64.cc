@@ -44,11 +44,6 @@ int main(const int argc, const char *argv[]) {
         in.read(reinterpret_cast<char *>(edges.data()), file_size);
         in.close();
 
-        std::cout << io_filename << ": reversing edges ..." << std::endl;
-        for (std::pair<NodeID, NodeID> &edge : edges) {
-            std::swap(edge.first, edge.second);
-        }
-
         std::cout << io_filename << ": sorting edges ..." << std::endl;
         ips4o::parallel::sort(edges.begin(), edges.end());
 
