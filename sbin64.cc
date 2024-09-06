@@ -19,6 +19,8 @@ int main(const int argc, const char *argv[]) {
         std::exit(1);
     }
 
+    std::vector<std::pair<NodeID, NodeID>> edges(0);
+        
     for (std::size_t i = 1; i < argc; ++i) {
         const std::string io_filename = argv[i];
 
@@ -37,8 +39,9 @@ int main(const int argc, const char *argv[]) {
         std::cout << io_filename << ": preallocating "
                   << file_size / 1024 / 1024 / 1024 << " GB for " << num_edges
                   << " edges ..." << std::endl;
+        edges.clear();
+        edges.resize(num_edges);
 
-        std::vector<std::pair<NodeID, NodeID>> edges(num_edges);
 
         std::cout << io_filename << ": reading input file ..." << std::endl;
         in.read(reinterpret_cast<char *>(edges.data()), file_size);
