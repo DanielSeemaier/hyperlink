@@ -19,7 +19,8 @@ class MappedFileToker {
         assert(_fd != -1 && "open() failed");
 
         struct stat file_info {};
-        assert(fstat(_fd, &file_info) != -1 && "fstat() failed");
+        const int ans = fstat(_fd, &file_info);
+        assert(ans != -1 && "fstat() failed");
 
         _position = 0;
         _length = static_cast<std::size_t>(file_info.st_size);
