@@ -46,13 +46,13 @@ int main(const int argc, const char *argv[]) {
     MappedFileToker toker(input_filename);
 
     std::cout << "Parsing input file ... ("
-              << toker.length() / 1024 / 1024 / 1024 << " GB) ..." << std::endl;
+              << toker.Length() / 1024 / 1024 / 1024 << " GB) ..." << std::endl;
 
-    toker.skip_spaces();
+    toker.SkipSpaces();
     std::uint64_t self_loops_removed = 0;
-    while (toker.valid_position()) {
-        const NodeID u = static_cast<NodeID>(toker.scan_uint());
-        const NodeID v = static_cast<NodeID>(toker.scan_uint());
+    while (toker.ValidPosition()) {
+        const NodeID u = static_cast<NodeID>(toker.ScanUInt());
+        const NodeID v = static_cast<NodeID>(toker.ScanUInt());
 
         if (u < v) {
             edges.emplace_back(u, v);
@@ -65,7 +65,7 @@ int main(const int argc, const char *argv[]) {
         if (sizeof(std::pair<NodeID, NodeID>) * edges.size() %
                 (1024 * 1024 * 1024) ==
             0) {
-            std::cout << "\t" << toker.position() / 1024 / 1024 / 1024
+            std::cout << "\t" << toker.Position() / 1024 / 1024 / 1024
                       << " GB, removed " << self_loops_removed
                       << " self-loops (= "
                       << sizeof(std::pair<NodeID, NodeID>) *
