@@ -32,17 +32,21 @@ int main(const int argc, const char *argv[]) {
     std::uint64_t self_loops = 0;
     std::uint64_t multi_edges = 0;
     std::uint64_t lineno = 0;
+    std::uint64_t forward_edge = 0;
+    std::uint64_t backward_edge = 0;
+
     while (toker.ValidPosition()) {
         const NodeID u = static_cast<NodeID>(toker.ScanUInt());
         const NodeID v = static_cast<NodeID>(toker.ScanUInt());
 
         multi_edges += (lineno > 0 && prev_u == u && prev_v == v);
         self_loops += (u == v);
+        forward_edge += (u < v);
+        backward_edge += (u > v);
         ++lineno;
 
         if (prev_u > u || (prev_u == u && prev_v > v)) {
-            std::cerr << "Error in line " << lineno
-                      << ": input file is not sorted\n";
+            std::cerr << "Error in line " << lineno << ": not sorted\n";
             std::cerr << "Previous edge: " << prev_u << "\t" << prev_v << "\n";
             std::cerr << "Current edge:  " << u << "\t" << v << "\n";
             std::exit(1);
@@ -53,8 +57,9 @@ int main(const int argc, const char *argv[]) {
     }
 
     std::cout << "Edges:       " << lineno << "\n";
-    std::cout << "Self-loops:  " << self_loops << "\n";
     std::cout << "Multi-edges: " << multi_edges << "\n";
-    std::cout << "Remaining:   " << lineno - self_loops - multi_edges << "\n";
+    std::cout << "u < v:       " << forward_edge << "\n";
+    std::cout << "u = v:       " << self_loops << "\n";
+    std::cout << "u > v:       " << backward_edge << "\n";
     std::cout << "Done." << std::endl;
 }
