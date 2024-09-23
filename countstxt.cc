@@ -33,13 +33,12 @@ int main(const int argc, const char *argv[]) {
     std::uint64_t multi_edges = 0;
     std::uint64_t lineno = 0;
     while (toker.ValidPosition()) {
-        ++lineno;
-
         const NodeID u = static_cast<NodeID>(toker.ScanUInt());
         const NodeID v = static_cast<NodeID>(toker.ScanUInt());
 
-        multi_edges += (prev_u == u && prev_v == v);
+        multi_edges += (lineno > 0 && prev_u == u && prev_v == v);
         self_loops += (u == v);
+        ++lineno;
 
         if (prev_u > u || (prev_u == u && prev_v > v)) {
             std::cerr << "Error in line " << lineno
